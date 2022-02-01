@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import badge from "@assets/icons/badge.png";
 
 const ImageBoxBlock = styled.div<ImageBoxProps>`
+  position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   ${({ selected }) =>
@@ -19,16 +21,36 @@ const ImageBoxBlock = styled.div<ImageBoxProps>`
   }
 `;
 
+const Badge = styled.div`
+    position: absolute;
+    top: 3px;
+    right: 8px;
+    background-image: url(${badge});
+    width: 24px;
+    height: 28px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 25px;
+    color: white;
+    text-align: center;
+    padding-left: 1px;
+}`;
+
 interface ImageBoxProps {
   width: number;
   height: number;
   selected: boolean;
+  discount?: number;
 }
 
-const ImageBox = ({ width = 106, height = 106, selected }: ImageBoxProps) => {
+const ImageBox = ({ width = 106, height = 106, selected, discount }: ImageBoxProps) => {
   return (
-    <ImageBoxBlock width={width} height={height} selected={selected}>
+    <ImageBoxBlock width={width} height={height} selected={selected} discount={discount}>
       <img src="https://cdn.ggumim.co.kr/cache/furniture/300/20220110174102naCtctXTxY.png" alt="가구 이미지" />
+      {discount && <Badge>{discount}%</Badge>}
     </ImageBoxBlock>
   );
 };

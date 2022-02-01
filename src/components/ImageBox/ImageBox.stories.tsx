@@ -14,6 +14,12 @@ Default.args = {
   width: 106,
   height: 106,
 };
+export const Discount = Template.bind({});
+Discount.args = {
+  width: 106,
+  height: 106,
+  discount: 48,
+};
 
 export const Selected = Template.bind({});
 Selected.args = {
