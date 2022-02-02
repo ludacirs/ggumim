@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { IProduct } from "@models/ImageView";
 import { ImageBox } from "@components/atoms";
+import { useProductState, useSetProduct } from "@contexts/ProductContext";
 
 const ImageSlideBlock = styled.div`
   display: flex;
@@ -32,12 +33,30 @@ interface ImageSlideProps {
 }
 
 const ImageSlide = ({ productList }: ImageSlideProps) => {
+  const setProduct = useSetProduct();
+  const selectedProduct = useProductState();
+
+  const toggleTooltip = (nextProduct: string) => {
+    return () => {
+      if (nextProduct === selectedProduct) {
+        setProduct("");
+      } else {
+        setProduct(nextProduct);
+      }
+    };
+  };
+
   return (
     <ImageSlideBlock>
       <SlideWrapper>
-        {productList.map((product) => (
-          <SlideItem key={product.productId}>
-            <ImageBox imageUrl={product.imageUrl} selected={false} />
+        {productList.map(({ productId, imageUrl, discountRate, productName }) => (
+          <SlideItem key={productId}>
+            <ImageBox
+              imageUrl={imageUrl}
+              selected={selectedProduct === productName}
+              discount={discountRate}
+              onClick={toggleTooltip(productName)}
+            />
           </SlideItem>
         ))}
       </SlideWrapper>
