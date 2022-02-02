@@ -3,13 +3,14 @@ import { ToggleButton } from "@components/atoms";
 import { Bubble } from "@components/molecules";
 import { useSetProduct, useProductState } from "@contexts/ProductContext";
 import React from "react";
+import useDirection from "@components/molecules/ToolTip/useDirection";
 
 const ToolTipBlock = styled.div<Pick<ToolTipProps, "pointY" | "pointX">>`
   position: absolute;
   top: ${({ pointX }) => pointX * 1.6}px;
   left: ${({ pointY }) => pointY * 1.7}px;
 `;
-interface ToolTipProps {
+export interface ToolTipProps {
   productionName: string;
   imageUrl: string;
   priceDiscount: number;
@@ -18,6 +19,7 @@ interface ToolTipProps {
   pointX: number;
   pointY: number;
   productId: number;
+  imageHeight: number;
 }
 
 const ToolTip = ({
@@ -29,12 +31,11 @@ const ToolTip = ({
   outside,
   pointX,
   pointY,
+  imageHeight,
 }: ToolTipProps) => {
   const setProduct = useSetProduct();
   const selectedProduct = useProductState();
-
-  const upOrDown = pointY * 1.7 < 450 ? "up" : "down";
-  const leftOrRight = pointX * 1.6 < 400 ? "right" : "left";
+  const { upOrDown, leftOrRight } = useDirection({ imageHeight, pointX, pointY });
 
   const isOpen = selectedProduct === productionName;
 

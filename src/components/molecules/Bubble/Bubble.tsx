@@ -2,10 +2,13 @@ import * as S from "./style";
 import { ImageBox } from "@components/atoms";
 import { addCommaSecond } from "../../../utils/format";
 
+export type TUpOrDown = "up" | "down";
+export type TLeftOrRight = "left" | "right";
+
 export interface BubbleProps {
   direction: {
-    leftOrRight: "left" | "right";
-    upOrDown: "up" | "down";
+    leftOrRight: TLeftOrRight;
+    upOrDown: TUpOrDown;
   };
   price: number;
   discount: number;

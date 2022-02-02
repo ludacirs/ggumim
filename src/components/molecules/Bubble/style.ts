@@ -30,6 +30,9 @@ export const BubbleBlock = styled.div<Pick<BubbleProps, "direction" | "isOpen">>
     ${({ direction }) => (direction.leftOrRight === "left" ? "left: 34px;" : "right: 34px;")}
     ${({ direction }) => (direction.upOrDown === "up" ? "top: -8px;" : "bottom: -8px;")}
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const RightSection = styled.div`
