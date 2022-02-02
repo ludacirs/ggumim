@@ -24,12 +24,22 @@ const Template: ComponentStory<typeof ToolTip> = (args) => (
 
 export const Open = Template.bind({});
 Open.args = {
-  isOpen: true,
+  priceDiscount: 9999,
+  productionName: "가구",
+  discountRate: 30,
+  pointX: 50,
+  pointY: 50,
   imageUrl: "https://cdn.ggumim.co.kr/cache/furniture/300/20220110174102naCtctXTxY.png",
+  outside: false,
 };
 
-export const Close = Template.bind({});
-Close.args = {
-  isOpen: false,
-  imageUrl: "https://cdn.ggumim.co.kr/cache/furniture/300/20220110174102naCtctXTxY.png",
-};
+// export const Close = Template.bind({});
+// Close.args = {
+//   isOpen: false,
+//   priceDiscount: 9999,
+//   productionName: "가구",
+//   discountRate: 30,
+//   pointX: 50,
+//   pointY: 50,
+//   imageUrl: "https://cdn.ggumim.co.kr/cache/furniture/300/20220110174102naCtctXTxY.png",
+// };

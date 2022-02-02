@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import lens from "@assets/icons/lens.png";
 import close from "@assets/icons/close.png";
+import { MouseEventHandler } from "react";
 
 const ToggleButtonBlock = styled.button`
   width: 32px;
@@ -13,11 +14,12 @@ const ToggleButtonBlock = styled.button`
 
 interface ToggleButtonProps {
   isOpen: boolean;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const ToggleButton = ({ isOpen = false }: ToggleButtonProps) => {
+const ToggleButton = ({ isOpen = false, onClick }: ToggleButtonProps) => {
   return (
-    <ToggleButtonBlock>
+    <ToggleButtonBlock onClick={onClick}>
       <img src={isOpen ? close : lens} alt={"button"} />
     </ToggleButtonBlock>
   );

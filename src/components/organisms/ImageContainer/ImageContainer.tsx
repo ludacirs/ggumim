@@ -24,7 +24,6 @@ const ImageContainer = ({ imageViewData }: ImageContainerProps) => {
       {productList.map(({ discountRate, productId, productName, priceDiscount, outside, imageUrl, pointX, pointY }) => (
         <ToolTip
           key={productId}
-          isOpen={false}
           discountRate={discountRate}
           imageUrl={imageUrl}
           priceDiscount={priceDiscount}
