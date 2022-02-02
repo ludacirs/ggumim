@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { BubbleProps } from "./Bubble";
+
 export const BubbleBlock = styled.div<Pick<BubbleProps, "direction">>`
-  z-index: 1000;
-  position: relative;
+  position: absolute;
+  ${({ direction }) => (direction.upAndDown === "up" ? `top: 30px;` : "top: -95px;")}
+  ${({ direction }) => (direction.leftAndRight === "left" ? `left: -26px;` : "left: -161px;")}
+  
   display: flex;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.95);
@@ -51,6 +54,7 @@ export const Title = styled.div`
 export const PriceTab = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const ExpectedPrice = styled.span`

@@ -1,5 +1,5 @@
-import { ImageBox } from "../atoms";
 import * as S from "./style";
+import { ImageBox } from "@components/atoms";
 
 export interface BubbleProps {
   direction: {
@@ -20,9 +20,8 @@ const Bubble = ({ direction, price, discount, imgURL, title }: BubbleProps) => {
         <S.Title>{title}ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㄴㅇ</S.Title>
         <S.PriceTab className="price-tab">
           {discount ? <S.Discount>{discount}%</S.Discount> : <S.ExpectedPrice>예상가</S.ExpectedPrice>}
-          <S.Price className={"price"}>
-            {price} {">"}
-          </S.Price>
+          <S.Price className={"price"}>{price}</S.Price>
+          <div>{">"}</div>
         </S.PriceTab>
       </S.RightSection>
     </S.BubbleBlock>
