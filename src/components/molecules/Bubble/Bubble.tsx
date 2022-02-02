@@ -1,5 +1,6 @@
 import * as S from "./style";
 import { ImageBox } from "@components/atoms";
+import { addCommaSecond } from "../../../utils/format";
 
 export interface BubbleProps {
   direction: {
@@ -21,7 +22,7 @@ const Bubble = ({ isOpen, direction, price, discount, imageUrl, title, outside }
         <S.Title>{title}</S.Title>
         <S.PriceTab className="price-tab">
           {!outside ? <S.Discount>{discount}%</S.Discount> : <S.ExpectedPrice>예상가</S.ExpectedPrice>}
-          <S.Price className={"price"}>{price}</S.Price>
+          <S.Price className={"price"}>{addCommaSecond(price)}</S.Price>
           <div>{">"}</div>
         </S.PriceTab>
       </S.RightSection>
