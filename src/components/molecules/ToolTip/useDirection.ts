@@ -10,7 +10,7 @@ const useDirection: ({ imageHeight, pointX, pointY }: TUseDirection) => {
   leftOrRight: TLeftOrRight;
 } = ({ imageHeight, pointX, pointY }) => {
   const [upOrDown, setUpOrDown] = useState<TUpOrDown>("up");
-  const leftOrRight = pointY * WEIGHT.Y > IMAGE_WIDTH ? "right" : "left";
+  const leftOrRight = pointY * WEIGHT.Y > IMAGE_WIDTH / 2 ? "right" : "left";
 
   useEffect(() => {
     setUpOrDown(pointX * WEIGHT.X < imageHeight / 2 ? "up" : "down");
