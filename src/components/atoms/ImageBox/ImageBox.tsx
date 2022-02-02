@@ -12,14 +12,14 @@ const ImageBoxBlock = styled.div<Omit<ImageBoxProps, "imageUrl" | "onClick">>`
   border-radius: 18px; 
   padding: 2px;`
       : `
-  border: 0.5px solid #aaafb9;
-  border-radius: 18px;`};
+  border-radius: 18px;
+  padding: 2px;`};
 
   img {
     width: 100%;
     height: 100%;
     border-radius: ${({ radius }) => radius}px;
-    border: 0.5px solid white;
+    border: 0.5px solid ${({ selected }) => (selected ? "white" : "#aaafb9")};
   }
 `;
 
