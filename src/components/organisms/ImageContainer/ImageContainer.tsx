@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { IImageView } from "@models/ImageView";
-import ToolTip from "@components/molecules/ToolTip/ToolTip";
+import { ToolTip } from "@components/molecules";
 
 const ImageContainerBlock = styled.div`
   position: relative;
@@ -12,41 +12,28 @@ const ImageContainerBlock = styled.div`
     height: inherit;
   }
 `;
-interface ImageContainerProps {}
+interface ImageContainerProps {
+  imageViewData: IImageView;
+}
 
-const ImageContainer = ({}: ImageContainerProps) => {
-  const [test, setTest] = useState<IImageView>();
-  useEffect(() => {
-    const fetchAPI = async () => {
-      const response = await fetch("dummy.json");
-      const data = await response.json();
-      setTest(data);
-    };
-    fetchAPI();
-  }, []);
-
+const ImageContainer = ({ imageViewData }: ImageContainerProps) => {
+  const { imageUrl, productList } = imageViewData;
   return (
     <ImageContainerBlock>
-      {test && (
-        <>
-          <img src={test.imageUrl} alt="전체 이미지" />
-          {test.productList.map(
-            ({ discountRate, productId, productName, priceDiscount, outside, imageUrl, pointX, pointY }) => (
-              <ToolTip
-                key={productId}
-                isOpen={false}
-                discountRate={discountRate}
-                imageUrl={imageUrl}
-                priceDiscount={priceDiscount}
-                outside={outside}
-                productionName={productName}
-                pointX={pointX}
-                pointY={pointY}
-              />
-            )
-          )}
-        </>
-      )}
+      <img src={imageUrl} alt="전체 이미지" />
+      {productList.map(({ discountRate, productId, productName, priceDiscount, outside, imageUrl, pointX, pointY }) => (
+        <ToolTip
+          key={productId}
+          isOpen={false}
+          discountRate={discountRate}
+          imageUrl={imageUrl}
+          priceDiscount={priceDiscount}
+          outside={outside}
+          productionName={productName}
+          pointX={pointX}
+          pointY={pointY}
+        />
+      ))}
     </ImageContainerBlock>
   );
 };

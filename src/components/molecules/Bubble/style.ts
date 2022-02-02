@@ -3,8 +3,8 @@ import { BubbleProps } from "./Bubble";
 
 export const BubbleBlock = styled.div<Pick<BubbleProps, "direction">>`
   position: absolute;
-  ${({ direction }) => (direction.upAndDown === "up" ? `top: 30px;` : "top: -95px;")}
-  ${({ direction }) => (direction.leftAndRight === "left" ? `left: -26px;` : "left: -161px;")}
+  ${({ direction }) => (direction.upOrDown === "up" ? `top: 30px;` : "top: -95px;")}
+  ${({ direction }) => (direction.leftOrRight === "left" ? `left: -26px;` : "left: -161px;")}
   
   display: flex;
   align-items: center;
@@ -23,11 +23,11 @@ export const BubbleBlock = styled.div<Pick<BubbleProps, "direction">>`
     position: absolute;
     border-color: rgba(255, 255, 255, 0.95) transparent;
     border-style: solid;
-    ${({ direction }) => (direction.upAndDown === "up" ? `border-width: 0 8px 8px;` : "border-width: 8px 8px 0;")}
+    ${({ direction }) => (direction.upOrDown === "up" ? `border-width: 0 8px 8px;` : "border-width: 8px 8px 0;")}
     display: block;
     z-index: 1;
-    ${({ direction }) => (direction.leftAndRight === "left" ? "left: 34px;" : "right: 34px;")}
-    ${({ direction }) => (direction.upAndDown === "up" ? "top: -8px;" : "bottom: -8px;")}
+    ${({ direction }) => (direction.leftOrRight === "left" ? "left: 34px;" : "right: 34px;")}
+    ${({ direction }) => (direction.upOrDown === "up" ? "top: -8px;" : "bottom: -8px;")}
   }
 `;
 
@@ -61,7 +61,6 @@ export const ExpectedPrice = styled.span`
   line-height: 1.2em;
   color: #898f94;
   font-size: 11px;
-  line-height: 11px;
   font-weight: bold;
   margin-right: 4px;
 `;

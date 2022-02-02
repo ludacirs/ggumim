@@ -28,11 +28,20 @@ const ToolTip = ({
   pointX,
   pointY,
 }: ToolTipProps) => {
+  const upOrDown = pointX < 400 ? "up" : "down";
+  const leftOrRight = pointY < 400 ? "left" : "right";
+
   return (
     <ToolTipBlock pointX={pointX} pointY={pointY}>
       <ToggleButton isOpen={isOpen} />
       {isOpen && (
-        <Bubble title={"s"} imgURL={""} discount={10} price={1} direction={{ upAndDown: "up", leftAndRight: "left" }} />
+        <Bubble
+          title={productionName}
+          imageUrl={imageUrl}
+          discount={discountRate}
+          price={priceDiscount}
+          direction={{ upOrDown, leftOrRight }}
+        />
       )}
     </ToolTipBlock>
   );

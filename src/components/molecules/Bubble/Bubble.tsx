@@ -3,21 +3,20 @@ import { ImageBox } from "@components/atoms";
 
 export interface BubbleProps {
   direction: {
-    leftAndRight: "left" | "right";
-    upAndDown: "up" | "down";
+    leftOrRight: "left" | "right";
+    upOrDown: "up" | "down";
   };
   price: number;
   discount: number;
-  imgURL: string;
+  imageUrl: string;
   title: string;
 }
-
-const Bubble = ({ direction, price, discount, imgURL, title }: BubbleProps) => {
+const Bubble = ({ direction, price, discount, imageUrl, title }: BubbleProps) => {
   return (
     <S.BubbleBlock direction={direction}>
-      <ImageBox width={70} height={70} selected={false} radius={4} />
+      <ImageBox width={70} height={70} selected={false} radius={4} imageUrl={imageUrl} />
       <S.RightSection>
-        <S.Title>{title}ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㄴㅇ</S.Title>
+        <S.Title>{title}</S.Title>
         <S.PriceTab className="price-tab">
           {discount ? <S.Discount>{discount}%</S.Discount> : <S.ExpectedPrice>예상가</S.ExpectedPrice>}
           <S.Price className={"price"}>{price}</S.Price>

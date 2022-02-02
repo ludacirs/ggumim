@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import badge from "@assets/icons/badge.png";
 
-const ImageBoxBlock = styled.div<ImageBoxProps>`
+const ImageBoxBlock = styled.div<Omit<ImageBoxProps, "imageUrl">>`
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
@@ -40,17 +40,18 @@ const Badge = styled.div`
 }`;
 
 interface ImageBoxProps {
-  width: number;
-  height: number;
-  selected: boolean;
+  width?: number;
+  height?: number;
   discount?: number;
-  radius: number;
+  radius?: number;
+  selected: boolean;
+  imageUrl: string;
 }
 
-const ImageBox = ({ width = 106, height = 106, radius = 16, selected, discount }: ImageBoxProps) => {
+const ImageBox = ({ width = 106, height = 106, radius = 16, selected, discount, imageUrl }: ImageBoxProps) => {
   return (
     <ImageBoxBlock width={width} height={height} selected={selected} discount={discount} radius={radius}>
-      <img src="https://cdn.ggumim.co.kr/cache/furniture/300/20220110174102naCtctXTxY.png" alt="가구 이미지" />
+      <img src={imageUrl} alt="가구 이미지" />
       {discount && <Badge>{discount}%</Badge>}
     </ImageBoxBlock>
   );
