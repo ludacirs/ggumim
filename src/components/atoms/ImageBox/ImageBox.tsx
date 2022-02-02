@@ -16,7 +16,7 @@ const ImageBoxBlock = styled.div<ImageBoxProps>`
   img {
     width: 100%;
     height: 100%;
-    border-radius: 16px;
+    border-radius: ${({ radius }) => radius}px;
     border: 0.5px solid white;
   }
 `;
@@ -44,11 +44,12 @@ interface ImageBoxProps {
   height: number;
   selected: boolean;
   discount?: number;
+  radius: number;
 }
 
-const ImageBox = ({ width = 106, height = 106, selected, discount }: ImageBoxProps) => {
+const ImageBox = ({ width = 106, height = 106, radius = 16, selected, discount }: ImageBoxProps) => {
   return (
-    <ImageBoxBlock width={width} height={height} selected={selected} discount={discount}>
+    <ImageBoxBlock width={width} height={height} selected={selected} discount={discount} radius={radius}>
       <img src="https://cdn.ggumim.co.kr/cache/furniture/300/20220110174102naCtctXTxY.png" alt="가구 이미지" />
       {discount && <Badge>{discount}%</Badge>}
     </ImageBoxBlock>
