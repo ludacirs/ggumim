@@ -1,7 +1,6 @@
 import * as S from "./style";
 import { ImageBox } from "@components/atoms";
 import { addCommaSecond } from "../../../utils/format";
-import { FocusEventHandler, useEffect, useRef } from "react";
 
 export interface BubbleProps {
   direction: {
@@ -14,18 +13,14 @@ export interface BubbleProps {
   title: string;
   isOpen: boolean;
   outside: boolean;
-  onBlur: FocusEventHandler<HTMLDivElement>;
+  productId: number;
 }
-const Bubble = ({ isOpen, direction, price, discount, imageUrl, title, outside, onBlur }: BubbleProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.focus();
-    }
-  }, [isOpen]);
-
+const Bubble = ({ productId, isOpen, direction, price, discount, imageUrl, title, outside }: BubbleProps) => {
+  const moveToProductPage = () => {
+    window.location.href = `https://www.ggumim.co.kr/furniture/view/${productId}`;
+  };
   return (
-    <S.BubbleBlock direction={direction} isOpen={isOpen} tabIndex={1} ref={ref} onBlur={onBlur}>
+    <S.BubbleBlock direction={direction} isOpen={isOpen} tabIndex={1} onClick={moveToProductPage}>
       <ImageBox width={70} height={70} selected={false} radius={4} imageUrl={imageUrl} />
       <S.RightSection>
         <S.Title>{title}</S.Title>

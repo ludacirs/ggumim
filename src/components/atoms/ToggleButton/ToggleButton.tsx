@@ -14,12 +14,12 @@ const ToggleButtonBlock = styled.button`
 
 interface ToggleButtonProps {
   isOpen: boolean;
-  onMouseDown: MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const ToggleButton = ({ isOpen = false, onMouseDown }: ToggleButtonProps) => {
+const ToggleButton = ({ isOpen = false, onClick }: ToggleButtonProps) => {
   return (
-    <ToggleButtonBlock onMouseDown={onMouseDown}>
+    <ToggleButtonBlock onClick={onClick}>
       <img src={isOpen ? close : lens} alt={"button"} />
     </ToggleButtonBlock>
   );

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ToggleButton } from "@components/atoms";
 import { Bubble } from "@components/molecules";
 import { useSetProduct, useProductState } from "@contexts/ProductContext";
+import React from "react";
 
 const ToolTipBlock = styled.div<Pick<ToolTipProps, "pointY" | "pointX">>`
   position: absolute;
@@ -16,9 +17,19 @@ interface ToolTipProps {
   outside: boolean;
   pointX: number;
   pointY: number;
+  productId: number;
 }
 
-const ToolTip = ({ priceDiscount, productionName, imageUrl, discountRate, outside, pointX, pointY }: ToolTipProps) => {
+const ToolTip = ({
+  productId,
+  priceDiscount,
+  productionName,
+  imageUrl,
+  discountRate,
+  outside,
+  pointX,
+  pointY,
+}: ToolTipProps) => {
   const setProduct = useSetProduct();
   const selectedProduct = useProductState();
 
@@ -27,14 +38,18 @@ const ToolTip = ({ priceDiscount, productionName, imageUrl, discountRate, outsid
 
   const isOpen = selectedProduct === productionName;
 
-  const toggleTooltip = () => {
-    setProduct(productionName);
+  const toggleTooltip = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setProduct((prevProduct) => {
+      return prevProduct === productionName ? "" : productionName;
+    });
   };
 
   return (
     <ToolTipBlock pointX={pointX} pointY={pointY}>
-      <ToggleButton isOpen={isOpen} onMouseDown={toggleTooltip} />
+      <ToggleButton isOpen={isOpen} onClick={toggleTooltip} />
       <Bubble
+        productId={productId}
         isOpen={isOpen}
         title={productionName}
         imageUrl={imageUrl}
@@ -42,7 +57,6 @@ const ToolTip = ({ priceDiscount, productionName, imageUrl, discountRate, outsid
         price={priceDiscount}
         direction={{ upOrDown, leftOrRight }}
         outside={outside}
-        onBlur={() => setProduct("")}
       />
     </ToolTipBlock>
   );
