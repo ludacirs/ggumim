@@ -7,7 +7,7 @@ export default {
   component: PictureViewer,
 } as Meta;
 
-const Template: ComponentStory<typeof PictureViewer> = (args) => <PictureViewer {...args} />;
+const Template: ComponentStory<typeof PictureViewer> = () => <PictureViewer />;
 
 export const Default = Template.bind({});
 Default.args = {};

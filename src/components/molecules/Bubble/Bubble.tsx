@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { ImageBox } from "@components/atoms";
-import { addCommaSecond } from "../../../utils/format";
+import { addCommaSecond } from "@utils/format";
 
 export type TUpOrDown = "up" | "down";
 export type TLeftOrRight = "left" | "right";

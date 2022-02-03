@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { SLIDE } from "../../../utils/constant";
+import { SLIDE } from "@utils/constant";
 import { IProduct } from "@models/ImageView";
 
 interface IUseSlide {

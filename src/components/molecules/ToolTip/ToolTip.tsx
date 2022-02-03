@@ -3,7 +3,7 @@ import { ToggleButton } from "@components/atoms";
 import { Bubble } from "@components/molecules";
 import { useSetProduct, useProductState } from "@contexts/ProductContext";
 import React from "react";
-import { IMAGE_WIDTH } from "../../../utils/constant";
+import { IMAGE_WIDTH } from "@utils/constant";
 import { TLeftOrRight, TUpOrDown } from "@components/molecules/Bubble/Bubble";
 
 const ToolTipBlock = styled.div<Pick<ToolTipProps, "pointY" | "pointX">>`
