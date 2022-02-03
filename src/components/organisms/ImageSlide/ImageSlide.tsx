@@ -67,7 +67,7 @@ const ImageSlide = ({ productList }: ImageSlideProps) => {
     <ImageSlideBlock ref={sliderRef}>
       <SlideWrapper>
         {productList.map(({ productId, imageUrl, discountRate, productName }) => (
-          <SlideItem key={productId} className={"slide-item"} data-name={productName}>
+          <SlideItem key={productId} className={"slide-item"} data-name={productName} draggable={false}>
             <ImageBox
               imageUrl={imageUrl}
               selected={selectedProduct === productName}

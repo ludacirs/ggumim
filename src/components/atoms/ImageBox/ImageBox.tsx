@@ -15,6 +15,9 @@ const ImageBoxBlock = styled.div<Omit<ImageBoxProps, "imageUrl" | "onClick">>`
     border-radius: ${({ radius }) => radius}px;
     border: 0.5px solid ${({ selected }) => (selected ? "white" : "#aaafb9")};
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Badge = styled.div`
@@ -55,7 +58,7 @@ const ImageBox = ({ width = 106, height = 106, radius = 16, selected, discount, 
       radius={radius}
       onClick={onClick}
     >
-      <img src={imageUrl} alt="가구 이미지" />
+      <img src={imageUrl} alt="가구 이미지" draggable={false} />
       {!!discount && <Badge>{discount}%</Badge>}
     </ImageBoxBlock>
   );
