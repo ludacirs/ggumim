@@ -23,6 +23,8 @@ const ImageContainer = ({ imageViewData }: ImageContainerProps) => {
   const setProduct = useSetProduct();
   const [rectInfo, callbackRef] = useBoundingRect();
 
+  const { height, heightWeight, widthWeight } = rectInfo;
+
   const offToolTip = () => {
     setProduct("");
   };
@@ -39,9 +41,9 @@ const ImageContainer = ({ imageViewData }: ImageContainerProps) => {
           priceDiscount={priceDiscount}
           outside={outside}
           productionName={productName}
-          pointX={pointX}
-          pointY={pointY}
-          imageHeight={rectInfo.height}
+          pointX={pointX * heightWeight}
+          pointY={pointY * widthWeight}
+          imageHeight={height}
         />
       ))}
     </ImageContainerBlock>
