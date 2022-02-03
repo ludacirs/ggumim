@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { IProduct } from "@models/ImageView";
 import { ImageBox } from "@components/atoms";
 import { useProductState, useSetProduct } from "@contexts/ProductContext";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { SLIDE } from "../../../utils/constant";
 
 const ImageSlideBlock = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const ImageSlideBlock = styled.div`
   overflow-y: hidden;
   overflow-x: auto;
 `;
-const SlideWrapper = styled.ul`
+const SlideWrapper = styled.ul<{ translateX: number }>`
   position: relative;
   width: 100%;
   height: 100%;
@@ -19,6 +20,10 @@ const SlideWrapper = styled.ul`
   display: flex;
   transition-property: transform;
   box-sizing: content-box;
+
+  will-change: contents;
+  transition: 0.45s;
+  transform: translateX(${({ translateX }) => translateX}px);
 `;
 
 const SlideItem = styled.li`
@@ -38,7 +43,7 @@ const ImageSlide = ({ productList }: ImageSlideProps) => {
   const selectedProduct = useProductState();
   const slideItemRef = useRef<{ [propsName: string]: HTMLDivElement }>({});
   const sliderRef = useRef<any>();
-
+  const [translateX, setTranslateX] = useState(0);
   const toggleTooltip = (nextProduct: string) => {
     return () => {
       if (nextProduct === selectedProduct) {
@@ -48,6 +53,12 @@ const ImageSlide = ({ productList }: ImageSlideProps) => {
       }
     };
   };
+  const maxTransX = Math.floor(productList.length / SLIDE.SCROLL_COUNT) * SLIDE.ITEM_WIDTH + SLIDE.PAD;
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [coordinate, setCoordinate] = useState({
+    startX: 0,
+    distance: 0,
+  });
 
   useEffect(() => {
     const imageElems = Array.from(document.querySelectorAll(".slide-item")) as HTMLDivElement[];
@@ -59,13 +70,39 @@ const ImageSlide = ({ productList }: ImageSlideProps) => {
   }, []);
 
   useEffect(() => {
-    const x = slideItemRef.current[selectedProduct]?.getBoundingClientRect().x;
-    x && sliderRef.current.scrollTo(x, 0);
+    if (!slideItemRef.current[selectedProduct]) {
+      return;
+    }
+    const transX = slideItemRef.current[selectedProduct]?.offsetLeft;
+
+    setTranslateX(transX);
   }, [selectedProduct]);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLUListElement>) => {
+    const { clientX } = e;
+    setIsMouseDown(true);
+    setCoordinate({ ...coordinate, startX: clientX });
+  };
+  const handleMouseUp = () => {
+    setCoordinate({ distance: 0, startX: 0 });
+    setIsMouseDown(false);
+  };
+  const handleMouseMove = (e: React.MouseEvent<HTMLUListElement>) => {
+    if (!isMouseDown) {
+      return;
+    }
+    setTranslateX(coordinate.startX - e.clientX < 0 ? 0 : coordinate.startX - e.clientX);
+  };
 
   return (
     <ImageSlideBlock ref={sliderRef}>
-      <SlideWrapper>
+      <SlideWrapper
+        translateX={-(translateX > maxTransX ? maxTransX : translateX - SLIDE.PAD)}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        draggable={false}
+      >
         {productList.map(({ productId, imageUrl, discountRate, productName }) => (
           <SlideItem key={productId} className={"slide-item"} data-name={productName} draggable={false}>
             <ImageBox
