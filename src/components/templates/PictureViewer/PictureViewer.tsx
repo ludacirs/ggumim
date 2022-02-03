@@ -11,7 +11,7 @@ const PictureViewerBlock = styled.div`
 `;
 
 const PictureViewer = () => {
-  const imageViewData = useFetch<IImageView>("dummy.json");
+  const imageViewData = useFetch<IImageView>("https://cdn.ggumim.co.kr/test/image_product_link.json");
 
   return (
     <PictureViewerBlock>
